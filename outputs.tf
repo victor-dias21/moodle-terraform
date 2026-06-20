@@ -32,3 +32,18 @@ output "moodle_bucket_name" {
   description = "Nome do bucket S3 privado do Moodle."
   value       = module.moodle_bucket.s3_bucket_id
 }
+
+output "moodle_instance_id" {
+  description = "ID da instancia EC2 do Moodle."
+  value       = module.moodle_instance.id
+}
+
+output "moodle_public_dns" {
+  description = "DNS publico da instancia Moodle."
+  value       = module.moodle_instance.public_dns
+}
+
+output "moodle_admin_secret_arn" {
+  description = "ARN do secret com a senha admin inicial do Moodle."
+  value       = aws_secretsmanager_secret.moodle_admin.arn
+}

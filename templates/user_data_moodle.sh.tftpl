@@ -1,0 +1,44 @@
+#!/bin/bash
+set -euo pipefail
+
+dnf update -y
+dnf install -y httpd php php-cli php-common php-mysqlnd php-gd php-intl php-mbstring php-soap php-xml php-zip php-opcache php-curl php-sodium mariadb105 awscli jq git
+
+systemctl enable --now httpd
+
+mkdir -p /var/www/moodledata
+chown -R apache:apache /var/www/moodledata
+chmod 770 /var/www/moodledata
+
+git clone --depth 1 --branch MOODLE_405_STABLE https://github.com/moodle/moodle.git /var/www/html/moodle
+chown -R apache:apache /var/www/html/moodle
+
+db_secret_json="$(aws secretsmanager get-secret-value --region "${aws_region}" --secret-id "${db_secret_arn}" --query SecretString --output text)"
+db_password="$(echo "$db_secret_json" | jq -r '.password')"
+
+admin_secret_json="$(aws secretsmanager get-secret-value --region "${aws_region}" --secret-id "${moodle_admin_secret_arn}" --query SecretString --output text)"
+admin_password="$(echo "$admin_secret_json" | jq -r '.password')"
+
+sudo -u apache php /var/www/html/moodle/admin/cli/install.php \
+  --non-interactive \
+  --agree-license \
+  --lang=pt_br \
+  --wwwroot="${moodle_url}" \
+  --dataroot=/var/www/moodledata \
+  --dbtype=mysqli \
+  --dbhost="${db_endpoint}" \
+  --dbname="${db_name}" \
+  --dbuser="${db_username}" \
+  --dbpass="$db_password" \
+  --fullname="${moodle_fullname}" \
+  --shortname="${moodle_shortname}" \
+  --adminuser="${moodle_admin_user}" \
+  --adminpass="$admin_password" \
+  --adminemail="${moodle_admin_email}"
+
+cat >/etc/profile.d/moodle-lab.sh <<'EOF'
+export MOODLE_DATA_BUCKET="${s3_bucket_name}"
+export MOODLE_URL="${moodle_url}"
+EOF
+
+systemctl restart httpd

@@ -109,3 +109,50 @@ variable "force_destroy_bucket" {
   type        = bool
   default     = false
 }
+
+variable "ami_id" {
+  description = "AMI Amazon Linux 2023 usada pela instancia Moodle."
+  type        = string
+}
+
+variable "instance_type" {
+  description = "Tipo da instancia EC2 do Moodle."
+  type        = string
+  default     = "t3.medium"
+}
+
+variable "key_name" {
+  description = "Nome opcional do key pair para acesso SSH."
+  type        = string
+  default     = null
+}
+
+variable "root_volume_size" {
+  description = "Tamanho do volume root da instancia Moodle em GiB."
+  type        = number
+  default     = 30
+}
+
+variable "moodle_fullname" {
+  description = "Nome completo inicial do site Moodle."
+  type        = string
+  default     = "Moodle Terraform Lab"
+}
+
+variable "moodle_shortname" {
+  description = "Nome curto inicial do site Moodle."
+  type        = string
+  default     = "moodle-lab"
+}
+
+variable "moodle_admin_user" {
+  description = "Usuario administrador inicial do Moodle."
+  type        = string
+  default     = "admin"
+}
+
+variable "moodle_admin_email" {
+  description = "Email do administrador inicial do Moodle."
+  type        = string
+  default     = "admin@example.com"
+}

@@ -19,6 +19,15 @@ db_engine_version          = "8.0"
 db_backup_retention_period = 7
 force_destroy_bucket       = false
 
+ami_id             = "ami-00000000000000000"
+instance_type      = "t3.medium"
+key_name           = null
+root_volume_size   = 30
+moodle_fullname    = "Moodle Terraform Lab"
+moodle_shortname   = "moodle-lab"
+moodle_admin_user  = "admin"
+moodle_admin_email = "admin@example.com"
+
 tags = {
   Owner = "victor-dias21"
 }
