@@ -67,3 +67,45 @@ variable "ssh_allowed_cidrs" {
   type        = list(string)
   default     = []
 }
+
+variable "db_name" {
+  description = "Nome do banco de dados do Moodle."
+  type        = string
+  default     = "moodle"
+}
+
+variable "db_username" {
+  description = "Usuario master do banco de dados."
+  type        = string
+  default     = "moodle"
+}
+
+variable "db_instance_class" {
+  description = "Classe da instancia RDS."
+  type        = string
+  default     = "db.t4g.micro"
+}
+
+variable "db_allocated_storage" {
+  description = "Storage inicial do RDS em GiB."
+  type        = number
+  default     = 20
+}
+
+variable "db_engine_version" {
+  description = "Versao do MySQL usada pelo RDS."
+  type        = string
+  default     = "8.0"
+}
+
+variable "db_backup_retention_period" {
+  description = "Periodo de retencao de backups do RDS em dias."
+  type        = number
+  default     = 7
+}
+
+variable "force_destroy_bucket" {
+  description = "Permite destruir o bucket S3 mesmo com objetos. Use apenas em laboratorio."
+  type        = bool
+  default     = false
+}

@@ -11,6 +11,14 @@ private_subnet_cidrs  = ["10.50.10.0/24", "10.50.11.0/24"]
 database_subnet_cidrs = ["10.50.20.0/24", "10.50.21.0/24"]
 ssh_allowed_cidrs     = ["203.0.113.10/32"]
 
+db_name                    = "moodle"
+db_username                = "moodle"
+db_instance_class          = "db.t4g.micro"
+db_allocated_storage       = 20
+db_engine_version          = "8.0"
+db_backup_retention_period = 7
+force_destroy_bucket       = false
+
 tags = {
   Owner = "victor-dias21"
 }
