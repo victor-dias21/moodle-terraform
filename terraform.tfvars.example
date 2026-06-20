@@ -28,6 +28,8 @@ moodle_shortname   = "moodle-lab"
 moodle_admin_user  = "admin"
 moodle_admin_email = "admin@example.com"
 
+cloudfront_price_class = "PriceClass_100"
+
 tags = {
   Owner = "victor-dias21"
 }

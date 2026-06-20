@@ -156,3 +156,9 @@ variable "moodle_admin_email" {
   type        = string
   default     = "admin@example.com"
 }
+
+variable "cloudfront_price_class" {
+  description = "Price class da distribuicao CloudFront."
+  type        = string
+  default     = "PriceClass_100"
+}

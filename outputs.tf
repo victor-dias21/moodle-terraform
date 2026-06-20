@@ -47,3 +47,13 @@ output "moodle_admin_secret_arn" {
   description = "ARN do secret com a senha admin inicial do Moodle."
   value       = aws_secretsmanager_secret.moodle_admin.arn
 }
+
+output "cloudfront_domain_name" {
+  description = "Dominio gerado pelo CloudFront."
+  value       = module.moodle_cdn.cloudfront_distribution_domain_name
+}
+
+output "route53_zone_id" {
+  description = "ID da zona publica criada no Route 53."
+  value       = module.moodle_dns.id
+}
