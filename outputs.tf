@@ -1,1 +1,4 @@
-# Outputs do projeto serao adicionados conforme a arquitetura evoluir.
+output "name_prefix" {
+  description = "Prefixo comum usado nos recursos."
+  value       = local.name_prefix
+}

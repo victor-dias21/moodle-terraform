@@ -1,0 +1,9 @@
+project_name     = "moodle"
+environment      = "lab"
+aws_region       = "us-east-1"
+domain_name      = "moodle.example.com"
+hosted_zone_name = "example.com"
+
+tags = {
+  Owner = "victor-dias21"
+}
